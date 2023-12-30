@@ -1,0 +1,81 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+
+<div class="header-bar">
+    <div>
+        <h1>Hola👋🏼, {{request.user|title}}</h1>
+        <p style="margin: 0">You have <i>{{count}}</i> incomplete task{{count|pluralize:"s"}}</p>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <!-- <p>{{request.user}}</p> -->
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+
+<div id="search-add-wrapper">
+    <form method="get">
+        <input type="text" name="search-area" value="{{search_input}}">
+        <input class="button search-button" type="submit" value="Search">
+    </form>
+    <div class="add-link-wrapper">
+        <a id="add-link" href="{% url 'task-create' %}">&#x2b; <span>Add task</span></a>
+    </div>
+</div>
+
+<!-- <h1>My task manager {{color}}</h1> -->
+
+
+
+
+
+<div class="task-items-wrapper">
+    {% for task in tasks %}
+    <div class="task-wrapper">
+        {% if task.complete %}
+        <div class="task-title">
+            <div class="task-complete-icon"></div>
+            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
+        </div>
+        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+        {% else %}
+        <div class="task-title">
+            <div class="task-incomplete-icon"></div>
+            <a href="{% url 'task-update' task.id %}">{{task}}</a>
+        </div>
+        <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+        {% endif %}
+    </div>
+
+    {% empty %}
+    <div class="task-wrapper">
+        <h3>No Items in the list</h3>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+<!-- <table>
+    <tr>
+        <th>Items</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.title}}</td>
+        <td><a href="{% url 'task' task.id %}">View</a></td>
+        <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+        <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
+    </tr>
+    {% empty %}
+    <h3>No Items in the list</h3>
+    {% endfor %}
+</table> -->
+
+{% endblock content %}
