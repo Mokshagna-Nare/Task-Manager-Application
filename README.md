@@ -1,6 +1,8 @@
 
 # Task-Manager-Application
 
+![Readme image](https://github.com/Mokshagna-Nare/Task-Manager-Application/assets/121237413/abb04582-5457-451d-8b2d-bb35830d6dcf)
+
 
 ## Overview
 This project is a task manager web application built using Django, HTML, CSS, and JavaScript. It offers functionalities for task creation, management, and user authentication.
